@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from "vue";
 import SearchResults from "../component/SearchResults.vue";
 import MyList from "../component/MyList.vue";
+import SearchForm from "../component/SearchForm.vue";
 
 const query = ref("");
 const my_anime = ref([]);
@@ -46,16 +47,6 @@ const addAnime = (anime) => {
   localStorage.setItem("my_anime", JSON.stringify(my_anime.value));
 };
 
-// const increaseWatch = (anime) => {
-//   anime.watched_episodes++;
-//   localStorage.setItem("my_anime", JSON.stringify(my_anime.value));
-// };
-
-// const decreaseWatch = (anime) => {
-//   anime.watched_episodes--;
-//   localStorage.setItem("my_anime", JSON.stringify(my_anime.value));
-// };
-
 onMounted(() => {
   my_anime.value = JSON.parse(localStorage.getItem("my_anime")) || [];
 });
@@ -65,21 +56,12 @@ onMounted(() => {
 
 <template>
   <div>
-    <form @submit.prevent="searchAnime">
-      <input
-        type="text"
-        placeholder="search..."
-        v-model="query"
-        @input="handleInput"
-      />
-      <button type="submit">search</button>
-    </form>
-
-    <SearchResults
-      :searchResults="search_results"
-      :myAnime="my_anime"
-      :addAnime="addAnime"
+    <SearchForm
+      :searchAnime="searchAnime"
+      :query="query"
+      :handleInput="handleInput"
     />
+    <SearchResults :searchResults="search_results" :addAnime="addAnime" />
     <MyList :myAnimeAsc="my_anime_asc" :myAnime="my_anime" />
   </div>
 </template>

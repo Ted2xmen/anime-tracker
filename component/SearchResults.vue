@@ -11,6 +11,6 @@
 
 <script>
 export default {
-  props: ["searchResults", "addAnime", "my_anime"],
+  props: ["searchResults", "addAnime"],
 };
 </script>

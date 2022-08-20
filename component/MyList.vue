@@ -20,6 +20,8 @@
 
 
 <script setup>
+import { onMounted } from "vue";
+
 const increaseWatch = (anime) => {
   anime.watched_episodes++;
   localStorage.setItem("my_animee", JSON.stringify(props.myAnime.value));
@@ -34,5 +36,9 @@ const props = defineProps({
   myAnimeAsc: Array,
 
   myAnime: Array | Object,
+});
+
+onMounted(() => {
+  props.myAnime.value = JSON.parse(localStorage.getItem("my_anime")) || [];
 });
 </script>
