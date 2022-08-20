@@ -1,9 +1,8 @@
 <template>
   <h2>My List</h2>
   <div v-for="(anime, i) in props.myAnimeAsc" :key="i">
-    <h3>{{ anime.title }}</h3>
-    <p>Rank: {{ anime.rank }}</p>
-    <span> {{ anime.watched_episodes }} / {{ anime.total_episodes }} </span>
+    <AnimeCard :anime="anime" />
+    <!-- <span> {{ anime.watched_episodes }} / {{ anime.total_episodes }} </span>  -->
     <button
       @click="increaseWatch(anime)"
       v-if="anime.total_episodes !== anime.watched_episodes"
@@ -21,6 +20,7 @@
 
 <script setup>
 import { onMounted } from "vue";
+import AnimeCard from "./AnimeCard.vue";
 
 const increaseWatch = (anime) => {
   anime.watched_episodes++;

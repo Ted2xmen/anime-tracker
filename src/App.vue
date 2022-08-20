@@ -36,12 +36,17 @@ const addAnime = (anime) => {
   my_anime.value.push({
     id: anime.mal_id,
     title: anime.title,
-    image: anime.image_url,
+    image: anime.images.jpg.image_url,
     rank: anime.rank,
     rating: anime.rating,
     total_episodes: anime.episodes,
     watched_episodes: 0,
     year: anime.year,
+    score: anime.score,
+    duration: anime.duration,
+    scored_by: anime.scored_by,
+    japanese: anime.title_japanese,
+    synopsis: anime.synopsis,
   });
 
   localStorage.setItem("my_anime", JSON.stringify(my_anime.value));
