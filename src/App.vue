@@ -4,7 +4,10 @@ import SearchResults from "../component/SearchResults.vue";
 import MyList from "../component/MyList.vue";
 import SearchForm from "../component/SearchForm.vue";
 
-const query = ref("");
+import { useAppStore } from "./store.js";
+
+const useStore = useAppStore();
+
 const my_anime = ref([]);
 const search_results = ref([]);
 
@@ -15,7 +18,7 @@ const my_anime_asc = computed(() => {
 });
 
 const searchAnime = () => {
-  const url = "https://api.jikan.moe/v4/anime?q=" + query.value;
+  const url = "https://api.jikan.moe/v4/anime?q=" + useStore.queryString;
   fetch(url)
     .then((res) => res.json())
     .then((res) => {
@@ -61,11 +64,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <SearchForm
-      :searchAnime="searchAnime"
-      :query="query"
-      :handleInput="handleInput"
-    />
+    <SearchForm :searchAnime="searchAnime" :handleInput="handleInput" />
     <SearchResults :searchResults="search_results" :addAnime="addAnime" />
     <MyList :myAnimeAsc="my_anime_asc" :myAnime="my_anime" />
   </div>

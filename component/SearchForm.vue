@@ -1,9 +1,20 @@
+<script setup>
+import { useAppStore } from "../src/store.js";
+
+const useStore = useAppStore();
+
+const props = defineProps({
+  searchAnime: Function,
+  handleInput: Function,
+});
+</script>
+
 <template>
   <form @submit.prevent="searchAnime">
     <input
       type="text"
       placeholder="search..."
-      v-model="query"
+      v-model="useStore.queryString"
       @input="handleInput"
     />
     <button type="submit">search</button>
@@ -11,10 +22,3 @@
 </template>
 
 
-<script setup>
-const props = defineProps({
-  searchAnime: Function,
-  query: String,
-  handleInput: Function,
-});
-</script>
